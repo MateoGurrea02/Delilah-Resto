@@ -44,3 +44,14 @@ create table order_line(
 	foreign key (order_id) references orders(id),
 	foreign key (product_id) references products(id)
 );
+
+insert into roles values(null,'Admin');
+insert into roles values(null,'User');
+insert into conditions values(null,'Confirmado');
+insert into conditions values(null,'En preparación');
+insert into conditions values(null,'En camino');
+insert into conditions values(null,'Entregado');
+insert into users values(null,'example_user','Admin','example_admin','admin@gmail.com','123','12345678','direction 124',1);
+insert into users values(null,'example_user','User','example_user','user@gmail.com','321','45695132','direction 484',2);
+insert into products values(null, 'Bagel de salmon', 425, 'img1');
+insert into products values(null, 'Hamburguesa Clasica', 350, 'img2');
