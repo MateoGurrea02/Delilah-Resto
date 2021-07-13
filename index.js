@@ -6,21 +6,29 @@ const connection = require('./connection');
 const UserController = require('./controllers/Users');
 const ProductsController = require('./controllers/Products');
 const OrderController = require('./controllers/Orders');
+const productModel = require('./models/products');
+const existProduct = require('./middlewares/existProducts');
+const existUser = require('./middlewares/existUser');
+const jwtMiddleware = require('./middlewares/verifyRol');
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/products', ProductsController.getAll);
-app.post('/products', ProductsController.create);
+//CRUD PRODUCTS
+app.get('/product', ProductsController.getAll);
+app.post('/product', jwtMiddleware,ProductsController.create);
+app.patch('/product/:id', jwtMiddleware,existProduct , ProductsController.update);
+app.delete('/product/:id', jwtMiddleware, existProduct, ProductsController.delete);
 
+//CRUD USERS
+app.get('/user', jwtMiddleware,UserController.getAll);
+app.post('/user', UserController.create);
+app.patch('/user/:id', existUser, UserController.update);
+app.delete('/user/:id', existUser, UserController.delete);
 
-
-
-
-
-
-
-
+//Login
+app.post('/login', UserController.login);
 
 
 
