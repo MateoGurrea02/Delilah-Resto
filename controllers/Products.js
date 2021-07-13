@@ -1,5 +1,4 @@
 const productModel = require('../models/products')
-const userModel = require('../models/users')
 class Products{
     static async getAll(req, res){
         try {
@@ -37,6 +36,48 @@ class Products{
                 status: 500,
                 error: error
             });
+        }
+    }    
+    
+    static async update(req, res){
+        try {
+            const { name, price, image } = req.body;
+            const productId = await productModel.findOne({
+                where: {
+                    id: req.params.id
+                }
+            });
+            const update = await productId.update(
+                {name,price,image},
+                {fields:["name", "price", "image"]}
+            )
+            return res.status(201).json({
+                status: 201,
+                message: 'Updated product'
+            }) 
+        }catch{
+            return res.status(500).json({
+                status: 500,
+                error
+            })   
+        }
+    }
+    static async delete(req, res){
+        try {   
+            const deleteP = await productModel.destroy({
+                where:{
+                    id: req.params.id
+                }            
+            });
+            return res.status(201).json({
+                status: 201,
+                message: 'Deleted product'
+            })
+        }catch{
+            return res.status(500).json({
+                status: 500,
+                error
+            })   
         }
     }
 }
