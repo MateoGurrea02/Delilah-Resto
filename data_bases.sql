@@ -25,14 +25,14 @@ create table orders(
 );
 create table users(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-	users_name VARCHAR(255) not null,
+	user_name VARCHAR(255) not null,
 	name VARCHAR(255)not null,
 	surname VARCHAR(255) not null,
 	email VARCHAR(25) not null,
 	password VARCHAR(255) not null,
 	phone_number VARCHAR(255) not null,
 	direction VARCHAR(255) not null,
-	role_id INT not null,
+	role_id INT default 2 not null,
 	foreign key (role_id) references roles(id)
 );
 
