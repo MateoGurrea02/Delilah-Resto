@@ -22,6 +22,32 @@ class User {
             });
         }
     }
+    //a function to obtain a one user
+    static async getOne(req, res){
+        try {
+            const user = await userModel.findOne({
+                where: {
+                    id: req.params.id
+                },
+                include:['roles'],
+                attributes: {   
+                    exclude: ["role_id"]
+                }
+            });
+            return res.json({
+                status: 200,
+                data: user
+            });
+        } catch (err) {
+            return res.status(500).json({
+                status: 500,
+                error: err
+            });
+        }
+    }
+
+
+
     static async create(req, res) {
         try {
             const { user_name, name, surname, email, password, phone_number, direction, role_id } = req.body;

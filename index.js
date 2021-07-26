@@ -1,4 +1,6 @@
-require('dotenv').config();
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./docs/swagger.yaml');
 const express = require('express');
 const app = express();
 
@@ -11,10 +13,20 @@ const existProduct = require('./middlewares/existProducts');
 const existUser = require('./middlewares/existUser');
 const isAdmin = require('./middlewares/isAdmin');
 const isUser = require('./middlewares/isUser');
+const config = require('./config/index');
 
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+//Docs
+if (config.env === 'development') {
+    const swaggerUi = require('swagger-ui-express');
+    const YAML = require('yamljs');
+    app.use(require('morgan')('dev'))
+    const swaggerDocument = YAML.load('./docs/swagger.yaml');
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+}
 
 //CRUD PRODUCTS
 app.get('/product', isUser, ProductsController.getAll);
@@ -28,6 +40,7 @@ app.get('/user', isAdmin,UserController.getAll);
 app.post('/user',UserController.create);
 app.patch('/user/:id', existUser, UserController.update);
 app.delete('/user/:id', existUser, UserController.delete);
+app.get('/user/:id', isAdmin, UserController.getOne);
 
 //Login
 app.post('/user/login', UserController.login);
@@ -40,7 +53,7 @@ app.post('/order', isUser,OrderController.create)
 
 
 
-const port = process.env.PORT;
+const port = config.port;
 app.listen(port, () => {
     console.log(`Server started on port=${port}`);
 });

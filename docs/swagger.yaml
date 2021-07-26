@@ -1,0 +1,187 @@
+openapi: 3.0.2
+info:
+  title: Delilah Resto
+  description: "Este proyectyo consta de la construccion de una rest API para una app de pedidos de un restaurante"
+  contact:
+    name: Mateo Gurrea
+    email: mategurrea@gmail.com
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: "Local"
+tags:
+  - name: user
+    description: Modulo de usuario
+  - name: role
+    description: Modulo de roles
+  - name: order
+    description: Modulo de ordenes
+  - name: product
+    description: Modulo de productos
+  - name: condition
+    description: Modulo de estado de pedidos
+paths:
+  /user/login:
+    post:
+      tags:
+        - user
+      summary: Endpoint para login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  required: true
+                password:
+                  type: string
+                  required: true
+      responses:
+        200:
+          description: Login satisfactorio
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 200
+                  token:
+                    type: string
+                  admin:
+                    type: boolean
+        401:
+          description: Usuario no valido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: 
+                    type: number
+                    example: 401
+                  message:
+                    type: string
+                    example: Usuario o contraseña invalido
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+  /user:
+    post:
+      tags:
+        - user
+      summary: Endpoint para crear usuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  required: true
+                email:
+                  type: string
+                  required: true
+                password:
+                  type: string
+                  required: true
+                phone:
+                  type: string
+                address:
+                  type: string
+                roles_id:
+                  type: number
+      responses:
+        201:
+          description: Usuario creado con exito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 201
+                  message:
+                    type: string
+                    example: Usuario creado!
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+    get:
+      tags:
+        - user
+      summary: Endpoint obtener
+      responses:
+        200:
+          description: Obtiene todos los usuarios
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: 200
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/user"
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+      security:
+        - bearerAuth: []
+components:
+  schemas:
+    error:
+      type: object
+      properties:
+        status:
+          type: number
+          example: 500
+        message:
+          type: string
+          example: Internal server error
+    user:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        phone:
+          type: string
+        address:
+          type: string
+        role:
+          $ref: '#/components/schemas/role'
+    role: 
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
