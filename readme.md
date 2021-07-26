@@ -44,80 +44,52 @@ _Ahora si con Node y Npm instalados tenes que abrir el proyecto con Visual Studi
 npm i
 ```
 
-_una vez intaladas las dependencias deberas copiar el contenido de **data_bases.sql** y pegarlo en DBeaver_
+_una vez intaladas las dependencias deberas abrir DBeaver y crear la base de datos como se muestra a continuacion_
 
+<p>
+  <img src="./img-readme/dbeaver1.png" title="img1">
+</p>
+<p>
+  <img src="./img-readme/dbeaver2.png" title="img1">
+</p>
+
+_La contraseña correspondiente a la base puede ser cualquiera pero por defecto te recomiendo que pongas root_
+
+<p>
+  <img src="./img-readme/dbeaver3.png" title="img1">
+</p>
+
+_Lo siquiente es abrir un script para ingresar los datos y tablas de la base de datos_
+
+<p>
+  <img src="./img-readme/dbeaver4.png" title="img1">
+</p>
+
+_para crear la base de datos deberas copiar todo el codigo que esta en el archivo **data_bases.sql** y pegarlo en el script que abriste y por ultimo ejecutarlo_
+
+<p>
+  <img src="./img-readme/dbeaver5.png" title="img1">
+</p>
+
+_Podes ejecuralo de dos manera_
+
+* Desde el simbolo indicado en la img siguiente
+* O colocando el mouse en cada una de las lineas y apretar **ctrl+enter** de manera secuencial,(Tabla por tabla) de arriba hacia abajo
+
+<p>
+  <img src="./img-readme/dbeaver6.png" title="img1">
+</p>
+
+## Iniciando el servidor 💻
+
+### Si dejaste la configuracion por defecto de la DB puedes saltarte esto
+
+_antes de poner arriba nuestro servidor tenes quie ir al archivo **.env** y corroborar los datos que hay en el si no son los correspondientes a los que tienes en tu base de datos deberas cambiarlos para que funcione_
+
+### Todo listo
+
+_una vez que corremos el script de la base de datos en DBeaver tenemos que ir a nuestro editor de codigo y ejecutar el siguiente comando el la terminal_
 ```
-hasta finalizar
+npm run dev
 ```
-![Screenshot](dbeaver1.png)
-
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
-
-## Ejecutando las pruebas ⚙️
-
-_Explica como ejecutar las pruebas automatizadas para este sistema_
-
-### Analice las pruebas end-to-end 🔩
-
-_Explica que verifican estas pruebas y por qué_
-
-```
-Da un ejemplo
-```
-
-### Y las pruebas de estilo de codificación ⌨️
-
-_Explica que verifican estas pruebas y por qué_
-
-```
-Da un ejemplo
-```
-
-## Despliegue 📦
-
-_Agrega notas adicionales sobre como hacer deploy_
-
-## Construido con 🛠️
-
-_Menciona las herramientas que utilizaste para crear tu proyecto_
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-* [Maven](https://maven.apache.org/) - Manejador de dependencias
-* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
-
-## Contribuyendo 🖇️
-
-Por favor lee el [CONTRIBUTING.md](https://gist.github.com/villanuevand/xxxxxx) para detalles de nuestro código de conducta, y el proceso para enviarnos pull requests.
-
-## Wiki 📖
-
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
-
-## Versionado 📌
-
-Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/tu/proyecto/tags).
-
-## Autores ✒️
-
-_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
-
-* **Andrés Villanueva** - *Trabajo Inicial* - [villanuevand](https://github.com/villanuevand)
-* **Fulanito Detal** - *Documentación* - [fulanitodetal](#fulanito-de-tal)
-
-También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) quíenes han participado en este proyecto. 
-
-## Licencia 📄
-
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
-
-## Expresiones de Gratitud 🎁
-
-* Comenta a otros sobre este proyecto 📢
-* Invita una cerveza 🍺 o un café ☕ a alguien del equipo. 
-* Da las gracias públicamente 🤓.
-* etc.
-
-
-
----
-⌨️ con ❤️ por [Villanuevand](https://github.com/Villanuevand) 😊
+### Y listo nuestro servidor ya esta arriba
