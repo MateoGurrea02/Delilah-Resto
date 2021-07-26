@@ -24,4 +24,5 @@ const model = connection.define(
 model.belongsTo(conditionModel, {as: 'condition', foreignKey: 'condition_id'});
 model.belongsTo(userModel, {as: 'user', foreignKey: 'user_id'});
 
+
 module.exports = model;

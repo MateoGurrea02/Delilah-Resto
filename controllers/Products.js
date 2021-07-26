@@ -14,6 +14,25 @@ class Products{
             });
         }
     }
+    static async getProductById(req, res){
+        try {
+            const product = await productModel.findOne({
+                where: {
+                    id: req.params.id
+                }
+            });
+            return res.json({
+                status: 200,
+                data: product
+            });
+        } catch (error) {
+            return res.status(500).json({
+                status: 500,
+                error: error
+            });
+        }
+    }
+
     static async create(req, res){
         try {
             const { name, price, image } = req.body;

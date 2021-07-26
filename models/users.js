@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 const connection = require('../connection');
-const rolModel = require('./roles')
+const rolModel = require('./role')
 
 const model = connection.define(
     'user',
@@ -34,4 +34,5 @@ const model = connection.define(
 
 
 model.belongsTo(rolModel, {as: 'roles', foreignKey: 'role_id'});
+
 module.exports = model;

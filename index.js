@@ -9,28 +9,32 @@ const OrderController = require('./controllers/Orders');
 const productModel = require('./models/products');
 const existProduct = require('./middlewares/existProducts');
 const existUser = require('./middlewares/existUser');
-const jwtMiddleware = require('./middlewares/verifyRol');
+const isAdmin = require('./middlewares/isAdmin');
+const isUser = require('./middlewares/isUser');
 
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //CRUD PRODUCTS
-app.get('/product', ProductsController.getAll);
-app.post('/product', jwtMiddleware,ProductsController.create);
-app.patch('/product/:id', jwtMiddleware,existProduct , ProductsController.update);
-app.delete('/product/:id', jwtMiddleware, existProduct, ProductsController.delete);
+app.get('/product', isUser, ProductsController.getAll);
+app.post('/product',isAdmin,ProductsController.create);
+app.patch('/product/:id',isAdmin,existProduct , ProductsController.update);
+app.delete('/product/:id',isAdmin, existProduct, ProductsController.delete);
+app.get('/product/:id', isUser, existProduct, ProductsController.getProductById);
 
 //CRUD USERS
-app.get('/user', jwtMiddleware,UserController.getAll);
-app.post('/user', UserController.create);
+app.get('/user', isAdmin,UserController.getAll);
+app.post('/user',UserController.create);
 app.patch('/user/:id', existUser, UserController.update);
 app.delete('/user/:id', existUser, UserController.delete);
 
 //Login
-app.post('/login', UserController.login);
+app.post('/user/login', UserController.login);
 
-
+//Orders
+app.get('/order', isUser,OrderController.getAll)
+app.post('/order', isUser,OrderController.create)
 
 
 

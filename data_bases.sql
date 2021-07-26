@@ -15,13 +15,7 @@ create table conditions(
 );
 create table roles(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-	nombre VARCHAR(255) not null
-);
-create table orders(
-	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-	condition_id INT not null,
-	user_id INT not null,
-	oreder_date DATE not null
+	name VARCHAR(255) not null
 );
 create table users(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
@@ -32,10 +26,18 @@ create table users(
 	password VARCHAR(255) not null,
 	phone_number VARCHAR(255) not null,
 	direction VARCHAR(255) not null,
-	role_id INT default 2 not null,
+	role_id INT default 2,
 	foreign key (role_id) references roles(id)
 );
 
+create table orders(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+	condition_id INT not null,
+	user_id INT not null,
+	order_date DATE not null,
+	foreign key (condition_id) references conditions(id),
+	foreign key (user_id) references users(id)
+);
 create table order_line(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	order_id int not null,
@@ -55,3 +57,4 @@ insert into users values(null,'example_user','Admin','example_admin','admin@gmai
 insert into users values(null,'example_user','User','example_user','user@gmail.com','321','45695132','direction 484',2);
 insert into products values(null, 'Bagel de salmon', 425, 'img1');
 insert into products values(null, 'Hamburguesa Clasica', 350, 'img2');
+

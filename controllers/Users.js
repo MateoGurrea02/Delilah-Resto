@@ -1,15 +1,19 @@
 const jwt = require('jsonwebtoken');
 
 const userModel = require('../models/users');
-const rolModel =require('../models/roles')
 
 class User {
     static async getAll(req, res){
         try {
-            const user = await userModel.findAll();
+            const users = await userModel.findAll({
+                attributes:{
+                    exclude: ["role_id"]
+                },
+                include: ['roles']
+            });
             return res.json({
                 status: 200,
-                data: user
+                data: users
             });
         } catch (err) {
             return res.status(500).json({
@@ -88,8 +92,9 @@ class User {
         const user = await userModel.findOne({
             where: {
                 email: req.body.email,
-                password: req.body.password
-            }
+                password: req.body.password,
+            },
+            include:['roles']
         })
         if (!user) {
             return res.status(401).json({
@@ -101,12 +106,12 @@ class User {
             user:{
                 id:user.id,
                 email:user.email,
-                rol: user.role_id
+                rol: user.roles.name
             }
         },process.env.JWT_SECRET);
         return res.json({
             token,
-            rol: user.role_id
+            rol: user.roles.name
         });
     }
 }

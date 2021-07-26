@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 const connection = require('../connection');
 
 const model = connection.define(
-    'rol',
+    'roles',
     {
         name: {
             type: DataTypes.STRING
