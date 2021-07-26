@@ -8,8 +8,7 @@ _Lo primero que debes hacer para montar el servidor en tu computadora es abrir e
 
 ### Pre-requisitos 📋
 
-_Uno de los requisitos para poder levantar el servidor es instalar **NodeJs** y **NPM** en tu computadora_
-_Para eso podes seguir esta pequeña guia_
+* _Uno de los requisitos para poder levantar el servidor es instalar **NodeJs** y **NPM** en tu computadora, Para eso podes seguir esta pequeña guia_
 
 ```
 https://www.cursosgis.com/como-instalar-node-js-y-npm-en-4-pasos/
@@ -17,6 +16,25 @@ https://www.cursosgis.com/como-instalar-node-js-y-npm-en-4-pasos/
 _O podes entrar a la pagina oficial de NodeJs descargar el instalador correspondiente a tu sistema operativo y version y seguir los pasos que te indica_
 ```
 https://nodejs.org/es/download/
+```
+
+* _Lo siguiente que tenemos que instalar es **MariaDB** en la computadora para que podamos interpretar las instrucciones de la base de datos, para eso podes seguir esta pequeña guia_
+```
+https://techexpert.tips/es/windows-es/instalacion-de-mariadb-en-windows/
+```
+_O tambien podes entrar a la pagina oficial de MariaDB y seguir las instrucciones_
+```
+https://mariadb.com/downloads/#mariadb_platform-mariadb_server
+```
+* _Y por ultimo tenemos que intalar **DBeaver** ejecutar las intrucciones y datos de la bsae de datos, aunque se pueden instalar otros administradores de bases de datos si lo desean_
+
+_Para instalar DBeaver podes seguir esta pequeña guia_
+```
+https://luissoto.website/como-instalar-y-configurar-dbeaver-en-windows-10/
+```
+_O podes entrar a la pagina oficial de DBeaver y seguir los pasos para su instalacion_
+```
+https://dbeaver.io/download/
 ```
 
 ### Instalación 🔧
