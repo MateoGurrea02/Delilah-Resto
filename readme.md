@@ -26,7 +26,7 @@ _O tambien podes entrar a la pagina oficial de MariaDB y seguir las instruccione
 ```
 https://mariadb.com/downloads/#mariadb_platform-mariadb_server
 ```
-* _Y por ultimo tenemos que intalar **DBeaver** ejecutar las intrucciones y datos de la bsae de datos, aunque se pueden instalar otros administradores de bases de datos si lo desean_
+* _Y por ultimo tenemos que intalar **DBeaver** para ejecutar las intrucciones y datos de la bsae de datos, aunque se pueden instalar otros administradores de bases de datos si lo desean_
 
 _Para instalar DBeaver podes seguir esta pequeña guia_
 ```
@@ -39,16 +39,17 @@ https://dbeaver.io/download/
 
 ### Instalación 🔧
 
-_Ahora si con Node y Npm instalados tenes que abrir el proyecto con Visual Studio Code, y en la terminal que trae integrada el editor de codigo, deberas correr el siguiente comando_
+_Ahora si con Node y Npm instalados tenes que abrir el proyecto con Visual Studio Code, y en la terminal que trae integrada el editor de codigo, deberas correr el siguiente comando, para instalar todas las dependencias y librerias que va a utilizar el proyecto_
 ```
 npm i
 ```
 
-_Y repite_
+_una vez intaladas las dependencias deberas copiar el contenido de **data_bases.sql** y pegarlo en DBeaver_
 
 ```
 hasta finalizar
 ```
+![Screenshot](dbeaver1.png)
 
 _Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
 
