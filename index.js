@@ -38,8 +38,8 @@ app.get('/product/:id', isUser, existProduct, ProductsController.getProductById)
 //CRUD USERS
 app.get('/user', isAdmin,UserController.getAll);
 app.post('/user',UserController.create);
-app.patch('/user/:id', existUser, UserController.update);
-app.delete('/user/:id', existUser, UserController.delete);
+app.patch('/user/:id', existUser, isAdmin, UserController.update);
+app.delete('/user/:id', existUser, isAdmin, UserController.delete);
 app.get('/user/:id', isAdmin, UserController.getOne);
 
 //Login
