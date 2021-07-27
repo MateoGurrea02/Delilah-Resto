@@ -93,3 +93,10 @@ _una vez que corremos el script de la base de datos en DBeaver tenemos que ir a 
 npm run dev
 ```
 ### Y listo nuestro servidor ya esta arriba
+
+## Documentacion📖
+_Con el servidor ya levantado para poder ver la documentacion del proyecto, desde el navegador tenemos que pegar la siguiente url_
+
+```
+http://localhost:3000/api-docs
+```
