@@ -8,7 +8,7 @@ function isUser(req, res, next) {
     const [token] = headerAuth.split(' ');
     try {
         const tokenDecoded = jwt.verify( token, process.env.JWT_SECRET);
-        const isAdmin = tokenDecoded.user.rol === 'User';
+        const isAdmin = tokenDecoded.user.rol === 'User' || tokenDecoded.user.rol === 'Admin';
         if(!isAdmin){
             return res.status('401').json({ message: 'You not authorized' });
         }
