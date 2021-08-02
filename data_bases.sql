@@ -11,7 +11,7 @@ create table products(
 );
 create table conditions(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-	nombre VARCHAR(255) not null
+	name VARCHAR(255) not null
 );
 create table roles(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
