@@ -600,6 +600,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/error500"
+  /order:
+    get:
+      tags:
+        - order
+      summary: Endpoint para obtener todas las ordenes
+      responses:
+        200:
+          description: Obtiene todas las ordenes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: 200
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/order"
+        401:
+          description: No estas autorizado o no mandaste el token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error401"
+        500:
+          description: Internal server error
+          content:  
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error500"
+    
+
 components:
   schemas:
     error401:
@@ -659,6 +693,39 @@ components:
           type: number
         img:
           type: string
+    order:
+      type: object
+      properties:
+        id:
+          type: number
+        oreder_date:
+          type: string
+        user:
+          $ref: '#/components/schemas/user'
+          excludes:
+            - password
+        condition:
+          $ref: '#/components/schemas/condition'
+        order_line:
+          type: array
+          items:
+            $ref: '#/components/schemas/order_line'
+    condition:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+    order_line:
+      type: object
+      properties: 
+        id:
+          type: number
+        total:
+          type: number
+        product:
+          $ref: '#/components/schemas/product'     
   securitySchemes:
     bearerAuth:
       type: http
