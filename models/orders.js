@@ -3,6 +3,7 @@ const { DataTypes } = require('sequelize');
 const connection = require('../connection');
 const conditionModel = require('./conditions')
 const userModel = require('./users')
+const orderLineModel = require('./order_line')
 
 
 const model = connection.define(
@@ -23,6 +24,7 @@ const model = connection.define(
 
 model.belongsTo(conditionModel, {as: 'condition', foreignKey: 'condition_id'});
 model.belongsTo(userModel, {as: 'user', foreignKey: 'user_id'});
+model.hasMany(orderLineModel, {as: 'order_line', foreignKey: 'order_id'});
 
 
 module.exports = model;

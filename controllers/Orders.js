@@ -2,14 +2,49 @@ const productModel = require('../models/products')
 const userModel = require('../models/users')
 const conditionModel = require('../models/conditions')
 const orderModel = require('../models/orders')
+const orderLineModel = require('../models/order_line')
+const model = require('../models/products')
 
 class OrderController {
     static async getAll(req, res) {
         try {
-            const order = await orderModel.findAll();
+            const orders = await orderModel.findAll({
+                include: [
+                    {
+                        model:userModel,
+                        as:'user',
+                        include:['roles'],
+                        attributes: {
+                            exclude: ['password','role_id']
+                        }
+                    },
+                    {
+                        model:conditionModel,
+                        as:'condition',
+                        attributes: ['name']
+                    },
+                    {
+                        model:orderLineModel,
+                        as:'order_line',
+                        include:[
+                            {
+                                model:productModel,
+                                as:'product',
+                                attributes: ['name','price','image']
+                            }
+                        ],
+                        attributes: {
+                            exclude: ['product_id','order_id']
+                        }
+                    }
+                    
+                ],attributes: {
+                    exclude: ['condition_id','user_id']
+                }
+            });
             return res.json({
                 status: 200,
-                data: order
+                data: orders
             });
         } catch (error) {
             return res.status(500).json({
@@ -18,6 +53,9 @@ class OrderController {
             });
         }
     }
+
+
+
     //a function to create a new order
     static async create(req, res) {
         try {
