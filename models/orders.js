@@ -17,6 +17,9 @@ const model = connection.define(
         },
         order_date:{
             type: DataTypes.DATE
+        },
+        total:{
+            type: DataTypes.DOUBLE
         }
     },{timestamps: false}
 );

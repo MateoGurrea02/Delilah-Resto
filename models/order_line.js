@@ -13,8 +13,8 @@ const model = connection.define(
         product_id: {
             type: DataTypes.INTEGER
         },
-        total: {
-            type: DataTypes.DOUBLE
+        quantity: {
+            type: DataTypes.INTEGER
         }
     },{timestamps: false}
 );

@@ -35,14 +35,15 @@ create table orders(
 	condition_id INT not null,
 	user_id INT not null,
 	order_date DATE not null,
+	total double,
 	foreign key (condition_id) references conditions(id),
 	foreign key (user_id) references users(id)
 );
-create table order_line(
+create table order_lines(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	order_id int not null,
 	product_id int not null,
-	total double not null,
+	quantity int,
 	foreign key (order_id) references orders(id),
 	foreign key (product_id) references products(id)
 );

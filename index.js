@@ -14,6 +14,7 @@ const existUser = require('./middlewares/existUser');
 const isAdmin = require('./middlewares/isAdmin');
 const isUser = require('./middlewares/isUser');
 const config = require('./config/index');
+const { validatorCreateOrder } = require('./controllers/validators/orders')
 
 
 app.use(express.json());
@@ -47,7 +48,7 @@ app.post('/user/login', UserController.login);
 
 //Orders
 app.get('/order', isUser,OrderController.getAll)
-app.post('/order', isUser,OrderController.create)
+app.post('/order',validatorCreateOrder, isUser,OrderController.create)
 
 
 
