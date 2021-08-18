@@ -34,7 +34,7 @@ create table orders(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 	condition_id INT not null,
 	user_id INT not null,
-	order_date DATE not null,
+	order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
 	total double,
 	foreign key (condition_id) references conditions(id),
 	foreign key (user_id) references users(id)
