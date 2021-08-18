@@ -3,6 +3,7 @@ require('dotenv').config();
 module.exports = {
     env: process.env.NODE_ENV,
     port: process.env.PORT || 3000,
+    jwt_secret: process.env.JWT_SECRET,
     database: {
         host: process.env.DB_HOST || 'localhost',
         port: process.env.DB_PORT || '3306',

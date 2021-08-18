@@ -1,4 +1,5 @@
-const { validationResult } = require('express-validator')
+const { validationResult, header } = require('express-validator')
+const moment = require('moment')
 const productModel = require('../models/products')
 const userModel = require('../models/users')
 const conditionModel = require('../models/conditions')
@@ -69,25 +70,57 @@ class OrderController {
             }
             // const { user_id } = req.user;
 
-            const { condition_id, user_id, order_date, quantity } = req.body;
             const { products } = req.body;
+            const { id } = req.user;
+            let total = 0;
 
-            // const order = await orderModel.create({
-            //     condition_id,
-            //     user_id,
-            //     order_date,
-            // });
-            
-            const order_id = order.id;
-            products.forEach((product, array) => {
-                // const { product_id, quantity, price, comments } = product;
-                product.order_id = order_id;
+            // check if each element is a product in de data base
+            products.forEach(async value => {
+                let productFound = await productModel.findByPk(value.id)
+                if(!productFound){
+                    return res.status(400).json({
+                        status: 400,
+                        error: "product with id " + value + " does not exist"
+                    })                   
+                };
+                total += productFound.price * value.quantity;
             });
-            const orderProduct = await orderLineModel.bulkCreate(products);
+            const condition = await conditionModel.findOne({
+                where: {
+                    name: 'Orden abierta'
+                }
+            });
+            let orderCreated = await orderModel.findOne({
+                where: {
+                    user_id: id,
+                    condition_id: condition.id
+                }
+            });
+            if(!orderCreated){               
+                orderCreated = await orderModel.create({
+                    condition_id: condition.id,
+                    user_id: id,
+                    order_date: moment().format('YYYY-MM-DD HH:mm:ss'),
+                });
+            }
 
-            return res.json({
-                status: 200,
-                data: {order_id: order.id}
+            // const order_id = order.id;
+            products.forEach(async product => {
+                await orderLineModel.create({
+                    product_id: product.id,
+                    order_id: orderCreated.id,
+                    quantity: product.quantity
+                });
+            });
+            total += orderCreated.total
+
+            orderCreated.total = total;
+            await orderCreated.save();
+            // const orderProduct = await orderLineModel.bulkCreate(products);
+
+            return res.status(201).json({
+                status: 201,
+                message: "order created or products add to order created",
             });
         } catch (error) {
             return res.status(500).json({
