@@ -49,7 +49,10 @@ app.post('/user/login', UserController.login);
 
 //Orders
 app.get('/order', isUser,OrderController.getAll)
+app.get('/order/:id', isAdmin, OrderController.getOne)
 app.post('/order', auth,validatorCreateOrder, isUser,OrderController.create)
+app.patch('/order/:id', isAdmin, OrderController.update)
+app.delete('/order/:id', isAdmin, OrderController.delete)
 
 
 
