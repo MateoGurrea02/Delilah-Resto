@@ -632,6 +632,169 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/error500"
+  /order/{id}:
+    patch:
+      tags:
+        - order
+      summary: Endpoint para editar la condicion de una orden por id
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: number
+            example: 5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                condition_id:
+                  type: number
+                  example: 5
+                  required: true
+      responses:
+        200:
+          description: Orden editada con exito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  status:
+                    type: number
+                    example: 200
+                  data:
+                    type: string
+                    example: "Order updated"
+        401:
+          description: No estas autorizado o no mandaste el token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error401"
+        404:
+          description: Orden no existe
+          content:  
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  status:
+                    type: number
+                    example: 404  
+                  message:  
+                    type: string
+                    example: order not found  
+        500:
+          description: Internal server error
+          content:  
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error500"
+    delete:
+      tags:
+        - order
+      summary: Endpoint para borrar una orden por id
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: number
+            example: 5
+      responses:
+        200:
+          description: Orden borrada con exito
+          content:
+            application/json:
+              schema:
+                type: object  
+                properties:
+                  status: 
+                    type: number
+                    example: 200  
+                  data: 
+                    type: string
+                    example: "Order deleted"  
+        401:
+          description: No estas autorizado o no mandaste el token
+          content:  
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error401"
+        404:  
+          description: Orden no existe
+          content:  
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  status:
+                    type: number
+                    example: 404  
+                  message:
+                    type: string
+                    example: order not found  
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error500"
+    get:
+      tags:
+        - order
+      summary: Endpoint para obtener una orden por id
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: number
+            example: 5
+      responses:
+        200:
+          description: Orden obtenida con exito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  status:
+                    type: number
+                    example: 200  
+                  data: 
+                    type: object
+                    $ref: "#/components/schemas/order"
+        401:
+          description: No estas autorizado o no mandaste el token
+          content:  
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error401"
+        404:  
+          description: Orden no existe
+          content:  
+            application/json:
+              schema:
+                type: object
+                properties:                 
+                  status:
+                    type: number
+                    example: 404  
+                  message:  
+                    type: string
+                    example: order not found  
+        500:  
+          description: Internal server error
+          content:  
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error500"
+    
+    
     
 
 components:
