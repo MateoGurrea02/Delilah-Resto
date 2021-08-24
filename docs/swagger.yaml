@@ -632,6 +632,56 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/error500"
+    post:
+      tags:
+        - order
+      summary: Endpoint para crear una orden
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: 
+                products:
+                  type: array
+                  required: true
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 5
+                        required: true
+                      quantity:
+                        type: number
+                        example: 5
+                        required: true
+      responses:
+        200:
+          description: Orden creada con exito
+          content:  
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: number
+                    example: 200  
+                  data:
+                    type: string
+                    example: "Order created"
+        401:
+          description: No estas autorizado o no mandaste el token
+          content:  
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error401"
+        500:  
+          description: Internal server error
+          content:  
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error500"
   /order/{id}:
     patch:
       tags:
