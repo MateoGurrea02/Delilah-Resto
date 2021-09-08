@@ -100,3 +100,7 @@ _Con el servidor ya levantado para poder ver la documentacion del proyecto, desd
 ```
 http://localhost:3000/api-docs
 ```
+_Mas Ejemplos de los endpoint en postman_
+```
+https://www.postman.com/blue-star-799371/workspace/delilha-resto/overview
+```
